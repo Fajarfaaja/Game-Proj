@@ -1,22 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-   public float health;
-   public float maxHealth;
-   public Image healthBar;
+    public int maxHealth = 100;
+    public int currentHealth;
+    public GameObject gameOverUI;
 
-   void Start()
-   {
-    maxHealth = health;
-   }
+    public HealthBar healthBar;
 
-   void Update()
-   {
-    healthBar.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1);
-   }
+    void Start()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+
+    // Method to take damage
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+        Debug.Log("Player health: " + currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+            GameOver();
+        }
+    }
+
+    // Method to handle player's death
+
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+        gameOverUI.SetActive(true);
+    }
 }

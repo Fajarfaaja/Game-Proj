@@ -70,5 +70,18 @@ namespace MyGameNamespace
             Debug.Log("Musuh mati!");
             Destroy(gameObject);
         }
+
+        void OnCollisionEnter(Collision collision)
+    {
+    // Check if the collided object has the tag "Player"
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(10);
+                }
+            }
+        }
     }
 }
