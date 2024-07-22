@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsQuit = false;
     public GameObject pauseMenuUI;
     public GameObject quitUI;
+    public GameObject followCamera;
+    public GameObject gunShoot;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,18 +37,22 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         quitUI.SetActive(false);
-        Time.timeScale = 1f;
+        Time.timeScale = 1;
         GameIsPause = false;
         GameIsQuit = false;
+        followCamera.SetActive(true);
+        gunShoot.SetActive(true);
     }
 
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
         quitUI.SetActive(false);
-        Time.timeScale = 0f;
+        Time.timeScale = 0;
         GameIsPause = true;
         GameIsQuit = false;
+        followCamera.SetActive(false);
+        gunShoot.SetActive(false);
     }
 
     public void Restart()
@@ -69,5 +75,10 @@ public class PauseMenu : MonoBehaviour
     {
         quitUI.SetActive(false);
         GameIsQuit = false;
+    }
+
+    public void Exit()
+    {
+        SceneManager.LoadScene("WelcomePage"); 
     }
 }

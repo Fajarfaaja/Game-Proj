@@ -8,12 +8,19 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("Environment"); // Ganti "Environment" dengan nama scene yang sesuai
     }
 
-    public void BackInCredit()
+    public void BackMenu()
     {
         SceneManager.LoadScene("WelcomePage"); // Ganti "Environment" dengan nama scene yang sesuai
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+        Debug.Log("Quit Game");
+    }
+
     public GameObject creditPanel;
+    public GameObject instructionPanel;
 
     public void ShowCredit()
     {
@@ -30,4 +37,22 @@ public class SceneController : MonoBehaviour
             creditPanel.SetActive(false); // Menyembunyikan panel kredit
         }
     }
+
+    public void ShowInstruction()
+    {
+        if (creditPanel != null)
+        {
+            instructionPanel.SetActive(true); // Menampilkan panel kredit
+        }
+    }
+
+    public void HideInstruction()
+    {
+        if (creditPanel != null)
+        {
+            instructionPanel.SetActive(false); // Menyembunyikan panel kredit
+        }
+    }
+
+
 }

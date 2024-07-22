@@ -5,16 +5,33 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
+    public Slider healthSlider;
+    public float maxHealth = 100f;
+    public float health;
 
-    public void SetMaxHealth(int health)
+    void Start()
     {
-        slider.maxValue = health;
-        slider.value = health;
+        health = maxHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = health;
     }
 
-    public void SetHealth(int health)
+    void Update()
     {
-        slider.value = health;
+        if (healthSlider.value != health)
+        {
+            healthSlider.value = health;
+        }
+    }
+
+    public void takeDamage(float damage) // Ubah menjadi public agar bisa diakses oleh peluru
+    {
+        health -= damage;
+        health = Mathf.Clamp(health, 0, maxHealth); // Pastikan health tidak kurang dari 0
+        if (health <= 0)
+        {
+            // Logika saat pemain mati
+            Debug.Log("Player Dead");
+        }
     }
 }
