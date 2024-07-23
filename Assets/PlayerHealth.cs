@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public GameObject gameOverUI;
+    public AudioSource audioSource;
 
     public HealthBar healthBar;
 
@@ -36,5 +37,10 @@ public class PlayerHealth : MonoBehaviour
     {
         Time.timeScale = 0f;
         gameOverUI.SetActive(true);
+
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
     }
 }
